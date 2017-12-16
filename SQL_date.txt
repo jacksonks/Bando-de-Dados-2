@@ -1,0 +1,93 @@
+ALTER TABLE candidato ADD COLUMN niver DATETIME;
+
+UPDATE `candidato` SET `niver`= '1980-01-01' WHERE numero=11;
+UPDATE `candidato` SET `niver`= '1979-11-28'WHERE numero=13;
+UPDATE `candidato` SET `niver`= '1975-05-12' WHERE numero=15;
+UPDATE `candidato` SET `niver`= '1939-03-17' WHERE numero=25;
+UPDATE `candidato` SET `niver`= '1940-10-24' WHERE numero=40;
+UPDATE `candidato` SET `niver`= '1999-05-01' WHERE numero=131;
+UPDATE `candidato` SET `niver`= '2000-11-25' WHERE numero=132;
+UPDATE `candidato` SET `niver`= '2001-07-20' WHERE numero=133;
+UPDATE `candidato` SET `niver`= '1992-04-25' WHERE numero=152;
+UPDATE `candidato` SET `niver`= '1996-06-17' WHERE numero=154;
+UPDATE `candidato` SET `niver`= '1965-08-04' WHERE numero=156;
+UPDATE `candidato` SET `niver`= '2000-09-28' WHERE numero=158;
+UPDATE `candidato` SET `niver`= '1988-02-02' WHERE numero=401;
+UPDATE `candidato` SET `niver`= '1971-01-01' WHERE numero=403;
+UPDATE `candidato` SET `niver`= '2002-10-19' WHERE numero=405;
+UPDATE `candidato` SET `niver`= '1997-12-05' WHERE numero=407;
+UPDATE `candidato` SET `niver`= '1996-11-27' WHERE numero=451;
+UPDATE `candidato` SET `niver`= '1987-08-21' WHERE numero=901;
+UPDATE `candidato` SET `niver`= '1972-08-05' WHERE numero=905;
+UPDATE `candidato` SET `niver`= '1960-07-12' WHERE numero=906;
+UPDATE `candidato` SET `niver`= '1966-09-09' WHERE numero=907;
+UPDATE `candidato` SET `niver`= '2001-04-26' WHERE numero=908;
+--------------------------------------------------------------
+
+SELECT DATE_FORMAT(`niver`, '%d/%m/%Y') FROM candidato;
+
+
+--------------------------------------------------------------
+ALTER TABLE candidato ADD COLUMN atualizacao TIMESTAMP;
+
+//vizualizar a coluna atuaizacao
+UPDATE `candidato` SET `niver`= '2011-04-26' WHERE numero=908;
+//vizualizar a coluna atuaizacao
+
+--------------------------------------------------------------
+
+SELECT DATE_FORMAT(`niver`, '%d/%m/%Y') as 'DATETIME',
+DATE_FORMAT(`niver`, '%d/%m/%Y') as 'DATE',
+DATE_FORMAT(`atualizacao`, '%d/%m/%Y') as 'TIMESTAMP'
+FROM candidato;
+
+----------------------------------------------------------------
+
+SELECT `niver`, DAYOFWEEK(`niver`) FROM `candidato`;
+
+SELECT `niver`, DAYOFYEAR(`niver`) FROM `candidato`;
+
+----------------------------------------------------------------
+
+
+SELECT `niver`,SUBDATE(`niver`, INTERVAL 5 DAY) from candidato;
+
+SELECT niver,DATE_ADD(niver, INTERVAL 3 DAY) from candidato;
+SELECT niver,DATE_ADD(niver, INTERVAL 1 MONTH) from candidato;
+
+SELECT DATEDIFF(NOW(),`niver`) FROM candidato;
+
+SELECT `nome` , DATE(`niver`) AS Aniversario FROM `candidato`;
+
+-----------------------------------------------------------------
+
+SELECT DATE_FORMAT(NOW(),'%b %d %Y %h:%i %p'),
+DATE_FORMAT(NOW(),'%m-%d-%Y'),
+DATE_FORMAT(NOW(),'%d %b %y'),
+DATE_FORMAT(NOW(),'%d %b %Y %T:%f');
+
+----------------------------------------------------------------
+
+//Juncao interna
+SELECT e.nome, s.local 
+FROM eleitor e, secao s
+WHERE e.secao = s.numero;
+
+
+SELECT e.nome, c.nome, v.ano 
+FROM eleitor e, votacao v, candidato c
+WHERE v.eleitor = e.titulo AND v.candidato = c.numero
+
+
+
+---------------------------------------------------------------
+SELECT e.nome, s.local 
+FROM eleitor e INNER JOIN  secao s
+ON e.secao = s.numero;
+
+
+SELECT e.nome, c.nome, v.ano 
+FROM (eleitor e INNER JOIN votacao V
+ON    v.eleitor = e.titulo  ) INNER JOIN candidato c
+ON v.candidato = c.numero
+

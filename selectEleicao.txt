@@ -1,0 +1,53 @@
+SELECT * FROM `candidato`;
+SELECT * FROM `eleitor`;
+SELECT * FROM `partido`;
+SELECT * FROM `secao`;
+SELECT * FROM `votacao`;
+
+SELECT `nome`, `cargo` FROM `candidato`;
+
+SELECT `nome` , `titulo` FROM `eleitor`;
+
+SELECT `nome`, `titulo`+2 FROM `eleitor`;
+
+SELECT `nome`, `titulo`+2 FROM `eleitor` WHERE `nome`='Antonia Souza';
+
+SELECT `sigla` AS 'SIGLA PARTIDO'  FROM `partido`;
+
+SELECT `candidato` FROM `votacao`;
+
+SELECT DISTINCT `candidato` FROM `votacao`; 
+
+SELECT `bairro`, `local` FROM `secao` WHERE `numero` = 2;
+
+SELECT * FROM `votacao` WHERE ANO >= 2000;
+
+SELECT * FROM `votacao` WHERE ANO BETWEEN 1990 AND 2002;
+
+SELECT * FROM `votacao` WHERE ANO IN (2000, 1998);
+
+SELECT `nome` FROM `candidato` WHERE `nome` LIKE 'J%';
+
+SELECT `nome` FROM `candidato` WHERE `nome` LIKE '_a%';
+
+SELECT `nome` FROM `candidato` WHERE `partido` IS NULL;
+
+SELECT * FROM `candidato` WHERE `cargo`='Vereador' AND `partido`='PMDB';
+
+SELECT * FROM `candidato` WHERE `cargo` NOT IN ('Vereador');
+
+
+SELECT `numero`, `bairro` FROM `secao` ORDER BY `bairro`;
+
+
+
+SELECT `nome` , `partido`FROM `candidato` ORDER BY `partido` DESC;
+
+SELECT `nome` , `partido`FROM `candidato` ORDER BY `partido` DESC, `nome`;
+
+1. Os nomes dos candidatos em ordem crescente.
+2. Os nomes dos candidatos do partido PSB.
+3. O nome e titulo do eleitor da secão 1.
+4. Os numeros dos eleitores que votaram no candidato de numero 3 em 1998.
+5. O local das seções eleitorais situadas no bairro centro.
+6. O numero dos candidatos que recebem voto em 1998. Numero sem repeticao.
